@@ -3,18 +3,24 @@ pipeline {
   stages {
     stage('Prepare Environment') {
       steps {
-        sh 'npm install'
-      }
-    }
-    stage('Build') {
-      steps {
-        sh 'npm run build'
+        sh 'curl -o- -L https://yarnpkg.com/install.sh | bash'
+        sh 'yarn install'
       }
     }
     stage('Test') {
       steps {
-        sh 'npm run test:ci'
-        junit(testResults: 'test-report.xml', healthScaleFactor: 1)
+        sh 'yarn test'
+      }
+    }
+    stage('Build') {
+      steps {
+        sh 'yarn run build'
+      }
+    }
+    stage('Post-Build') {
+      steps {
+        sh 'echo \'Upload to S3 here...\''
+        mail(subject: 'Bundle Build Successful', body: 'Congrats, your recent bundle build was successful!')
       }
     }
   }
