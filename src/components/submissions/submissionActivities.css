@@ -1,0 +1,265 @@
+/* Submission Details / Activities
+ *-------------------------------------- */
+i.fa-close {
+  cursor: pointer;
+}
+
+.submission-details .form h4 {
+  padding-top: 0;
+  margin-top: 0;
+  display: inline-block;
+}
+.submission-details .details > * {
+  padding: 0;
+  margin: 0;
+  line-height: 3rem;
+}
+.submission-details h4.row.buttons-header {
+  padding: 0;
+}
+.submission-details .timeline > li {
+  margin: 0;
+  float: none;
+  width: 100%;
+}
+.submission-details .timeline > li span {
+  margin-right: 4px;
+}
+.submission-details .timeline > li span.title {
+  font-weight: bold;
+}
+.submission-details .timeline > li span.title:after {
+  content: ":";
+}
+.submission-details .timeline > li:not(:last-child):after {
+  width: calc(50% + 1px);
+  width: -moz-calc(50% + 1px);
+  width: -webkit-calc(50% + 1px);
+  height: 2rem;
+  margin-top: 0;
+  border-right: 0.2rem solid #7e8083;
+}
+.submission-details .timeline > li.processing {
+  height: 10rem;
+  background-color: #F1F1F1;
+  padding: 4rem;
+}
+.submission-details .timeline > li > .start,
+.submission-details .timeline > li > .finish {
+  width: 15rem;
+  color: #ffffff;
+  background-color: #313E47;
+  border-radius: 0.4rem;
+  margin: auto;
+  padding: .5rem;
+  line-height: 1.5rem;
+}
+.submission-details .timeline > li > .timeline-badge {
+  display: none;
+}
+.submission-details .timeline > li > .timeline-panel {
+  width: 100%;
+  background-color: #ffffff;
+  border: none;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+.submission-details .timeline > li > .timeline-panel:before {
+  content: none;
+}
+.submission-details .timeline > li > .timeline-panel .timeline-heading {
+  background: #6F7E82;
+  color: white;
+}
+.submission-details .timeline > li > .timeline-panel .timeline-heading h4 {
+  color: white;
+}
+.submission-details .timeline > li > .timeline-panel .timeline-body div.row {
+  padding: 1rem 1.5rem;
+}
+.submission-details .timeline > li > .timeline-panel .timeline-body div.row > span.fa {
+  float: right;
+  margin-right: 1rem;
+}
+.submission-details .timeline > li > .timeline-panel .timeline-body div.row > span.fa.fa-thumbs-o-up {
+  color: #2b542c;
+}
+.submission-details .timeline > li > .timeline-panel .timeline-body div.row > span.fa.fa-thumbs-o-down {
+  color: #a94442;
+}
+.submission-details .timeline > li > .timeline-panel.grey {
+  background-color: #F1F1F1;
+  /*             .timeline-heading { */
+  /*               background: $lightgray; */
+  /*               h4 { */
+  /*                 background: $lightestgray; */
+  /*                 height: 2rem; */
+  /*                 display: block; */
+  /*                 margin-left: .5rem; */
+  /*                 margin-right: .5rem; */
+  /*                 @include border-radius(); */
+  /*               } */
+  /*             } */
+}
+.submission-details .timeline > li > .timeline-panel.grey .placeholder-time {
+  height: 2rem;
+  width: 10rem;
+  display: block;
+  margin-bottom: 1rem;
+  background: #d5d6d7;
+  border-radius: 0.4rem;
+}
+.submission-details .timeline > li > .timeline-panel.grey .placeholder-time:nth-child(2) {
+  width: 15rem;
+}
+.submission-details .timeline > li > .timeline-panel.grey .placeholder-desc {
+  height: 5rem;
+  width: 100%;
+  display: block;
+  background: #d5d6d7;
+  border-radius: 0.4rem;
+}
+
+/* Timeline
+ *-------------------------------------- */
+.timeline {
+  list-style: none;
+  padding: 1rem 0;
+  position: relative;
+  font-weight: 300;
+}
+.timeline > li {
+  margin-bottom: 20px;
+  position: relative;
+  width: 90%;
+  float: right;
+  clear: left;
+  background: transparent;
+}
+.timeline > li > .timeline-panel {
+  width: calc(100% - 25px);
+  width: -moz-calc(100% - 25px);
+  width: -webkit-calc(100% - 25px);
+  float: left;
+  background-color: #f0f3f5;
+  border: 1px solid rgba(49, 62, 71, 0.5);
+  border-radius: 0.4rem;
+  position: relative;
+}
+.timeline > li > .timeline-panel:before {
+  position: absolute;
+  top: 26px;
+  right: auto;
+  left: -15px;
+  display: inline-block;
+  border-top: 15px solid transparent;
+  border-left: 15px solid rgba(49, 62, 71, 0.5);
+  border-right: 0 solid rgba(49, 62, 71, 0.5);
+  border-bottom: 15px solid transparent;
+  border-left-width: 0;
+  border-right-width: 15px;
+  content: " ";
+}
+.timeline > li > .timeline-badge {
+  width: 120px;
+  height: 40px;
+  line-height: 5rem;
+  text-align: center;
+  position: absolute;
+  top: 16px;
+  left: -135px;
+  z-index: 100;
+}
+.timeline > li .timeline-title {
+  margin-top: 0;
+  color: inherit;
+}
+.timeline > li .timeline-heading h4 {
+  font-weight: 400;
+  padding: 5px 15px 0;
+}
+.timeline > li .timeline-heading h4 span.badge {
+  background-color: #1594C4;
+}
+.timeline > li .timeline-body > p,
+.timeline > li .timeline-body > ul {
+  padding: 10px 15px;
+  margin-bottom: 1rem;
+}
+.timeline > li .timeline-footer {
+  padding: 5px 15px;
+  background-color: #313E47;
+  min-height: 20px;
+}
+.timeline > li .timeline-footer p {
+  margin-bottom: 0;
+}
+.timeline > li .timeline-footer > a {
+  cursor: pointer;
+  text-decoration: none;
+  color: #ffffff;
+}
+.timeline > li .timeline-footer > a > i {
+  margin-left: 5px;
+}
+.timeline > li:before,
+.timeline > li:after {
+  content: " ";
+  display: table;
+}
+.timeline > li:after {
+  clear: both;
+}
+
+.timeline:before {
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  content: " ";
+  width: 2px;
+  background: transparent;
+  left: 50%;
+  margin-left: -1.5px;
+}
+
+/* Media Queries
+ *-------------------------------------- */
+@media (max-width: 767px) {
+  ul.timeline:before {
+    left: 4rem;
+  }
+
+  ul.timeline > li {
+    margin-bottom: 2rem;
+    position: relative;
+    width: 100%;
+    float: left;
+    clear: left;
+  }
+  ul.timeline > li > .timeline-panel {
+    width: calc(100% - 6.5rem);
+    width: -moz-calc(100% - 6.5rem);
+    width: -webkit-calc(100% - 6.5rem);
+  }
+  ul.timeline > li > .timeline-badge {
+    left: -1rem;
+    margin-left: 0;
+    line-height: normal;
+    top: 1.6rem;
+    width: 6.5rem;
+  }
+  ul.timeline > li > .timeline-panel {
+    float: right;
+  }
+  ul.timeline > li > .timeline-panel:before {
+    border-left-width: 0;
+    border-right-width: 1.5rem;
+    left: -1.5rem;
+    right: auto;
+  }
+  ul.timeline > li > .timeline-panel:after {
+    border-left-width: 0;
+    border-right-width: 1.4rem;
+    left: -1.4rem;
+    right: auto;
+  }
+}

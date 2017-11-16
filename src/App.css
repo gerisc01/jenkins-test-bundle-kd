@@ -1,0 +1,14 @@
+.box {
+  border: 1px solid #999;
+  margin: 1em 0;
+  padding: 1em;
+};
+.component {
+  margin: 0;
+  padding: 1em;
+  background-color: #e5e5e5;
+  border: 1px solid #444444;
+}
+*[data-element-type="field"] {
+  width: 300px;
+}
