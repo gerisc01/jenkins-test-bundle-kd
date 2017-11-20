@@ -5,6 +5,9 @@ pipeline {
       steps {
         sh 'curl -o- -L https://yarnpkg.com/install.sh | bash'
         sh 'yarn install'
+        sh 'sudo curl -O https://bootstrap.pypa.io/get-pip.py'
+        sh 'python get-pip.py --user'
+        sh 'pip install awscli --upgrade --user'
       }
     }
     stage('Test') {
