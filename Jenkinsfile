@@ -20,7 +20,7 @@ pipeline {
     stage('Post-Build') {
       steps {
         sh 'echo \'Upload to S3 here...\''
-        mail(subject: 'Bundle Build Successful', body: 'Congrats, your recent bundle build was successful!')
+        mail(subject: 'Bundle Build Successful', body: 'Congrats, your recent bundle build was successful!', to: 'scott.gerike@kineticdata.com')
       }
     }
   }
