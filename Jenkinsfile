@@ -6,8 +6,8 @@ pipeline {
         sh 'curl -o- -L https://yarnpkg.com/install.sh | bash'
         sh 'yarn install'
         sh 'curl -O https://bootstrap.pypa.io/get-pip.py'
-        sh 'python get-pip.py --user; export PATH=/var/lib/jenkins/.local/bin:$PATH'
-        sh 'pip install awscli --upgrade --user'
+        sh 'python get-pip.py --user'
+        sh '/var/lib/jenkins/.local/pip install awscli --upgrade --user'
       }
     }
     stage('Test') {
