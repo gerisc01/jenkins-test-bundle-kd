@@ -22,7 +22,7 @@ pipeline {
     }
     stage('Post-Build') {
       steps {
-        sh 'aws s3 sync dist s3://shayne-test1/jenkins-test-bundle-kd --acl public-read --metadata "cache-control=must-revalidate; max-age: 0"'
+        sh '/var/lib/jenkins/.local/bin/aws s3 sync dist s3://shayne-test1/jenkins-test-bundle-kd --acl public-read --metadata "cache-control=must-revalidate; max-age: 0"'
         mail(subject: 'Bundle Build Successful', body: 'Congrats, your recent bundle build was successful!', to: 'scott.gerike@kineticdata.com', from: 'scott.gerike@kineticdata.com')
       }
     }
