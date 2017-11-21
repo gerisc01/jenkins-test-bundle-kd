@@ -3,17 +3,20 @@ pipeline {
   stages {
     stage('Prepare Environment') {
       steps {
+        echo 'Installing/Updating Yarn and making sure bundle libraries are up to date'
         sh 'curl -o- -L https://yarnpkg.com/install.sh | bash'
         sh 'yarn install'
+        echo 'Installing/Updating AWS CLI'
         sh 'curl -O https://bootstrap.pypa.io/get-pip.py'
         sh 'python get-pip.py --user'
         sh '/var/lib/jenkins/.local/bin/pip install awscli --upgrade --user'
+        echo 'Setting AWS Credentials in files at ~/.aws for the CLI to use'
         withCredentials(bindings: [[$class: 'UsernamePasswordMultiBinding', credentialsId: 'd9b3e21f-24a7-4d0b-8be8-e55eab29894f',
                                   usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-          sh 'echo uname=$USERNAME pwd=$PASSWORD'
+          sh 'mkdir ~/.aws'
+          sh 'printf \'%s\n\' \'[default]\' \'output = json\' \'region = us-east-1\' > config'
+          sh 'printf \'%s\n\' \'[default]\' \'aws_access_key_id = $USERNAME\' \'aws_secret_access_key = $PASSWORD\' > credentials'
         }
-        
-        echo 'Making sure the AWS CLI can be loaded'
       }
     }
     stage('Test') {
@@ -26,11 +29,19 @@ pipeline {
         sh 'yarn run build'
       }
     }
-    stage('Post-Build') {
+    stage('Upload to S3') {
       steps {
         sh '/var/lib/jenkins/.local/bin/aws s3 sync dist s3://shayne-test1/jenkins-test-bundle-kd --acl public-read --metadata "cache-control=must-revalidate; max-age: 0"'
-        mail(subject: 'Bundle Build Successful', body: 'Congrats, your recent bundle build was successful!', to: 'scott.gerike@kineticdata.com', from: 'scott.gerike@kineticdata.com')
       }
+    }
+  }
+  
+  post {
+    success {
+      mail(subject: "Successful Build: Bundle '${currentBuild.fullDisplayName}'", body: 'Congrats, your recent bundle build was successful!', to: 'scott.gerike@kineticdata.com', from: 'scott.gerike@kineticdata.com')
+    }
+    failure {
+      mail(subject: "Failed Build: Bundle '${currentBuild.fullDisplayName}'", body: 'Congrats, your recent bundle build failed.', to: 'scott.gerike@kineticdata.com', from: 'scott.gerike@kineticdata.com')
     }
   }
 }
