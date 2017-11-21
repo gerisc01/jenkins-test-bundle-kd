@@ -8,6 +8,11 @@ pipeline {
         sh 'curl -O https://bootstrap.pypa.io/get-pip.py'
         sh 'python get-pip.py --user'
         sh '/var/lib/jenkins/.local/bin/pip install awscli --upgrade --user'
+        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'd9b3e21f-24a7-4d0b-8be8-e55eab29894f',
+          usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+
+          sh 'echo uname=$USERNAME pwd=$PASSWORD'
+        }
       }
     }
     stage('Test') {
