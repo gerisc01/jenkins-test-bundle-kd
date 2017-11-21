@@ -9,7 +9,8 @@
     "prebuild": "rimraf dist",
     "build": "cross-env NODE_ENV=production webpack -p",
     "test": "jest",
-    "test:watch": "jest --watch --notify"
+    "test:watch": "jest --watch --notify",
+    "test:ci": "jest --ci --testResultsProcessor=./node_modules/jest-junit-reporter"
   },
   "author": "",
   "license": "MIT",
@@ -35,6 +36,7 @@
     "eslint-plugin-react": "^6.10.3",
     "file-loader": "^0.11.1",
     "jest": "^20.0.1",
+    "jest-junit-reporter": "^1.1.0",
     "node-sass": "^4.5.2",
     "optional-require": "^1.0.0",
     "react-test-renderer": "^15.5.4",
