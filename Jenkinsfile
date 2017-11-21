@@ -3,13 +3,17 @@ pipeline {
   stages {
     stage('Prepare Environment') {
       steps {
-        sh 'curl -o- -L https://yarnpkg.com/install.sh | bash'
+        sh '''echo \'Making sure Yarn is installed on Jenkins machine\'
+curl -o- -L https://yarnpkg.com/install.sh | bash'''
         sh 'yarn install'
-        sh 'curl -O https://bootstrap.pypa.io/get-pip.py'
+        sh '''echo \'Making sure AWS CLI is installed and upgraded\'
+curl -O https://bootstrap.pypa.io/get-pip.py
+python get-pip.py --user
+/var/lib/jenkins/.local/bin/pip install awscli --upgrade --user'''
         sh 'python get-pip.py --user'
         sh '/var/lib/jenkins/.local/bin/pip install awscli --upgrade --user'
         withCredentials(bindings: [[$class: 'UsernamePasswordMultiBinding', credentialsId: 'd9b3e21f-24a7-4d0b-8be8-e55eab29894f',
-                  usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+                          usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
           sh 'echo uname=$USERNAME pwd=$PASSWORD'
         }
         
