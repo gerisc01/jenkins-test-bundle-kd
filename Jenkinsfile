@@ -40,6 +40,7 @@ pipeline {
           OPTIONS = '--acl public-read --metadata "cache-control=must-revalidate; max-age: 0"'
           sh "/var/lib/jenkins/.local/bin/aws s3 sync src s3://${BUCKET}/${S3DIR} ${OPTIONS}"
         }
+        
       }
     }
   }
