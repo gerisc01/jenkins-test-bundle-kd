@@ -1,10 +1,5 @@
 pipeline {
   agent any
-  
-  environment {
-    S3DIR = sh(script: 'echo `expr "$GIT_URL" : \'^.*/\\(.*\\)\\.git$\'`') 
-  }
-  
   stages {
     stage('Prepare Environment') {
       steps {
@@ -17,7 +12,7 @@ pipeline {
         sh '/var/lib/jenkins/.local/bin/pip install awscli --upgrade --user'
         echo 'Setting AWS Credentials in files at ~/.aws for the CLI to use'
         withCredentials(bindings: [[$class: 'UsernamePasswordMultiBinding', credentialsId: 'd9b3e21f-24a7-4d0b-8be8-e55eab29894f',
-                                                                                                                                  usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+                                                                                                                                          usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
           sh 'mkdir -p ~/.aws'
           sh '''printf \'%s
 \' \'[default]\' \'output = json\' \'region = us-east-1\' > config'''
@@ -44,7 +39,9 @@ pipeline {
       }
     }
   }
-
+  environment {
+    S3DIR = sh(script: 'echo `expr "$GIT_URL" : \'^.*/\\(.*\\)\\.git$\'`')
+  }
   post {
     success {
       mail(subject: "Successful Build: Bundle '${currentBuild.fullDisplayName}'", body: 'Congrats, your recent bundle build was successful!', to: 'scott.gerike@kineticdata.com', from: 'scott.gerike@kineticdata.com')
