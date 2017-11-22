@@ -3,6 +3,7 @@ pipeline {
   stages {
     stage('Prepare Environment') {
       steps {
+        sh 'expr "$GIT_URL" : \'^.*/\\(.*\\)\\.git$\''
         echo 'Installing/Updating Yarn and making sure bundle libraries are up to date'
         sh 'curl -o- -L https://yarnpkg.com/install.sh | bash'
         sh 'yarn install'
