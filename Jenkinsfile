@@ -18,8 +18,7 @@ pipeline {
     }
     stage('Upload to S3') {
       steps {
-        S3DIR = sh(returnStdout: true, script: 'echo `expr "$GIT_URL" : \'^.*/\\(.*\\)\\.git$\'`')
-        echo $S3DIR
+        echo sh(returnStdout: true, script: 'echo `expr "$GIT_URL" : \'^.*/\\(.*\\)\\.git$\'`')
       }
     }
   }
