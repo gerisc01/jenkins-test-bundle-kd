@@ -1,5 +1,10 @@
 pipeline {
   agent any
+  
+  environment {
+    S3DIR = sh(returnStdout: true, script: 'echo `expr "$GIT_URL" : \'^.*/\\(.*\\)\\.git$\'`')
+  }
+  
   stages {
     stage('Prepare Environment') {
       steps {
