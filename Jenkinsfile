@@ -36,7 +36,9 @@ pipeline {
       steps {
         script {
           S3DIR = sh(returnStdout: true, script: 'echo `expr "$GIT_URL" : \'^.*/\\(.*\\)\\.git$\'`')
-          sh "/var/lib/jenkins/.local/bin/aws s3 sync src s3://shayne-test1/${S3DIR} --metadata \"cache-control=must-revalidate; max-age: 0\""
+          acl = '--acl public-read'
+          metadata = '--metadata "cache-control=must-revalidate; max-age: 0"'
+          sh "/var/lib/jenkins/.local/bin/aws s3 sync src s3://shayne-test1/${S3DIR} ${acl} ${metadata}"
         }
         
       }
