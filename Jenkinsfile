@@ -36,7 +36,9 @@ pipeline {
     }
     stage('Upload to S3') {
       steps {
-        sh '/var/lib/jenkins/.local/bin/aws s3 sync dist s3://shayne-test1/jenkins-test-bundle-kd --acl public-read --metadata "cache-control=must-revalidate; max-age: 0"'
+        withEnv(['S3DIR=`expr "$GIT_URL" : '^.*/\(.*\)\.git$'`']) {
+          sh '/var/lib/jenkins/.local/bin/aws s3 sync dist s3://shayne-test1/$S3DIR --acl public-read --metadata "cache-control=must-revalidate; max-age: 0"'
+        }
       }
     }
   }
