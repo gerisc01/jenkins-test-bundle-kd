@@ -23,35 +23,13 @@ pipeline {
       }
     }
     stage('Test') {
-      steps {
-        sh 'yarn test:ci'
-        junit(testResults: 'test-report.xml', healthScaleFactor: 1)
-      }
     }
     stage('Build') {
-      steps {
-        sh 'yarn run build'
-      }
     }
     stage('Upload to S3') {
       environment {
         S3DIR = sh(script: 'echo `expr "$GIT_URL" : \'^.*/\\(.*\\)\\.git$\'`')
       }
-      steps {
-        sh '/var/lib/jenkins/.local/bin/aws s3 sync dist s3://shayne-test1/$S3DIR --acl public-read --metadata "cache-control=must-revalidate; max-age: 0"'
-      }
     }
-  }
-  post {
-    success {
-      mail(subject: "Successful Build: Bundle '${currentBuild.fullDisplayName}'", body: 'Congrats, your recent bundle build was successful!', to: 'scott.gerike@kineticdata.com', from: 'scott.gerike@kineticdata.com')
-      
-    }
-    
-    failure {
-      mail(subject: "Failed Build: Bundle '${currentBuild.fullDisplayName}'", body: 'Congrats, your recent bundle build failed.', to: 'scott.gerike@kineticdata.com', from: 'scott.gerike@kineticdata.com')
-      
-    }
-    
   }
 }
