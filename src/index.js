@@ -10,10 +10,6 @@ import './globals';
 import { AppContainer } from './components/AppContainer';
 import { configureStore } from './redux/store';
 
-// This src/index.js file is the main entry into the React application.  It does
-// not contain much application code, instead it is mostly boilerplate code that
-// wires up some of the features we want to add to our React application.
-//
 // When getting started, the most important piece is the line that contains:
 //   <Route path="/" component={AppContainer}/>
 // which specifies that the root of the application is to be AppContainer which
