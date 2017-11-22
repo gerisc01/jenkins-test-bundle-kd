@@ -38,6 +38,7 @@ pipeline {
           S3DIR = sh(returnStdout: true, script: 'echo `expr "$GIT_URL" : \'^.*/\\(.*\\)\\.git$\'`')
           sh "/var/lib/jenkins/.local/bin/aws s3 sync dist s3://shayne-test1/${S3DIR} --acl public-read --metadata \"cache-control=must-revalidate; max-age: 0\""
         }
+        
       }
     }
   }
